@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Faculdade</title>
+	
+	<!-- <link rel="StyleSheet" type="text/css" href="css/estilos.css" media="screen"/> -->
+	
+</h:head>
+
+
+
+
+
+<h:body>
+	<h1>Turmas</h1>
+	<h:messages for="email" autoUpdate="true" closable="true" />
+	<h:form >
+	
+		<h:panelGrid columns="2">
+		<h:message for="email" style="color:green"/>
+		    <h:inputText id="email" value="#{turmaBean.email}">
+		    <f:validator validatorId="emailValidator"/>
+		    </h:inputText>
+		    		
+			<h:outputText value="Nome" styleClass="edit" />
+			<h:inputText value="#{turmaBean.turmas.nome}" maxlength="20" />
+			
+			
+			<h:outputText value="CPF:" /> <h:inputText value="#{turmaBean.cpf}" converter="cpfConverte" />
+             
+			<h:commandButton action="#{turmaBean.addTurma}" value="Criar" />
+		</h:panelGrid>
+	</h:form>
+
+	<h:dataTable value="#{turmaBean.turma}" var="t" width="660px"
+		border="1" binding="#{turmaBean.tabelaPessoa}"  >
+
+		<h:column headerClass="col1" >
+			<f:facet name="header">
+				<h:outputText value="Id" />
+			</f:facet>
+			<h:outputText value="#{t.id}" />
+		</h:column>
+
+		<h:column>
+
+			<f:facet name="header">
+				<h:outputText value="Nome" />
+			</f:facet>
+
+			<h:form>
+				<h:commandLink action="#{turmaBean.ativar}" value="#{t.nome}" />
+			</h:form>
+
+		</h:column>
+
+	</h:dataTable>
+
+</h:body>
+</html>
